@@ -1,0 +1,21 @@
+<div class="container">
+    <form #travelForm="ngForm">
+        <h2>Reisedaten</h2>
+        <mat-form-field>
+            <mat-label>Von</mat-label>
+            <input matInput required type="datetime-local" class="form-control" id="start" name="start">
+        </mat-form-field> 
+        <mat-form-field>
+            <mat-label>Bis</mat-label>
+            <input matInput required type="datetime-local" class="form-control" id="end" name="end">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kunde</mat-label>
+            <mat-select name="customer">
+                <mat-option *ngFor="let customer of customers" [value]="customer.name" >
+                       {{customer.name}}
+               </mat-option>
+             </mat-select>
+        </mat-form-field>
+    </form>
+</div>

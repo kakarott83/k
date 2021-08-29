@@ -1,0 +1,45 @@
+<mat-drawer-container>
+	<mat-drawer #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
+		<div class="sidenav-header">
+            <img role="button" (click)="mobileQuery.matches ? snav.toggle() : collapsedNav = !collapsedNav" src="/assets/pictures/milan_logo.png" alt="" height="50" width="50">
+			<!--span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'Navigation'}}</span-->
+		</div>
+		<ul>
+			<li routerLink="/dashboard" >
+                <div class="sidNavItem">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Dashboard</span>
+                </div>
+			</li>
+			<li routerLink="/travel-new">
+                <div class="sidNavItem">
+                    <i class="fas fa-suitcase"></i>
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Neue Reise</span> 
+                </div>
+			</li>
+            <li routerLink="/travel-list">
+                <div class="sidNavItem">
+                    <i class="fas fa-list"></i>
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Alle Reisen</span> 
+                </div>
+			</li>
+            <li routerLink="/sign-out" >
+                <div class="sidNavItem">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Sign Out</span> 
+                </div>
+			</li>
+            <li routerLink="/setting">
+                <div class="sidNavItem">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Einstellungen</span> 
+                </div>
+			</li>
+		</ul>
+	</mat-drawer>
+	<mat-drawer-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
+        <mat-toolbar>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+	</mat-drawer-content>
+</mat-drawer-container>
