@@ -25,6 +25,10 @@ import { TravelNewComponent } from './travel/travel-new/travel-new.component';
 import { TravelDashboardComponent } from './travel/travel-dashboard/travel-dashboard.component';
 import { SettingComponent } from './admin/setting/setting.component';
 import { ConfirmSignOutComponent } from './credentials/confirm-sign-out/confirm-sign-out.component';
+import { UserComponent } from './user/user/user.component';
+import { ForgotPasswordComponent } from './credentials/forgot-password/forgot-password.component';
+import { VerifyEmailAddressComponent } from './credentials/verify-email-address/verify-email-address.component';
+import { WelcomeComponent } from './welcome/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { ConfirmSignOutComponent } from './credentials/confirm-sign-out/confirm-
     TravelNewComponent,
     TravelDashboardComponent,
     SettingComponent,
-    ConfirmSignOutComponent
+    ConfirmSignOutComponent,
+    UserComponent,
+    ForgotPasswordComponent,
+    VerifyEmailAddressComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

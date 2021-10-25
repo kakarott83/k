@@ -1,45 +1,57 @@
 <mat-drawer-container>
-	<mat-drawer #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
-		<div class="sidenav-header">
-            <img role="button" (click)="mobileQuery.matches ? snav.toggle() : collapsedNav = !collapsedNav" src="/assets/pictures/milan_logo.png" alt="" height="50" width="50">
-			<!--span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'Navigation'}}</span-->
-		</div>
-		<ul>
-			<li routerLink="/dashboard" >
+    <mat-drawer *ngIf="isLoggedIn$ | async as isLoggedIn" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
+        [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
+        <div class="sidenav-header">
+            <img role="button" (click)="mobileQuery.matches ? snav.toggle() : collapsedNav = !collapsedNav"
+                src="/assets/pictures/milan_logo.png" alt="" height="50" width="50">
+            <!--span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'Navigation'}}</span-->
+        </div>
+        <ul>
+            <li routerLink="/dashboard">
                 <div class="sidNavItem">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="sidNavItemText" [hidden]="collapsedNav">Dashboard</span>
                 </div>
-			</li>
-			<li routerLink="/travel-new">
+            </li>
+            <li routerLink="/travel-new">
                 <div class="sidNavItem">
                     <i class="fas fa-suitcase"></i>
-                    <span class="sidNavItemText" [hidden]="collapsedNav">Neue Reise</span> 
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Neue Reise</span>
                 </div>
-			</li>
+            </li>
             <li routerLink="/travel-list">
                 <div class="sidNavItem">
                     <i class="fas fa-list"></i>
-                    <span class="sidNavItemText" [hidden]="collapsedNav">Alle Reisen</span> 
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Alle Reisen</span>
                 </div>
-			</li>
-            <li routerLink="/sign-out" >
+            </li>
+            <li (click)="signOut()">
                 <div class="sidNavItem">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span class="sidNavItemText" [hidden]="collapsedNav">Sign Out</span> 
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Sign Out</span>
                 </div>
-			</li>
+            </li>
             <li routerLink="/setting">
                 <div class="sidNavItem">
                     <i class="fas fa-sliders-h"></i>
-                    <span class="sidNavItemText" [hidden]="collapsedNav">Einstellungen</span> 
+                    <span class="sidNavItemText" [hidden]="collapsedNav">Einstellungen</span>
                 </div>
-			</li>
-		</ul>
-	</mat-drawer>
-	<mat-drawer-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
-        <mat-toolbar>
+            </li>
+        </ul>
+    </mat-drawer>
+    <mat-drawer-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
+        <mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" class="nav-toolbar">
+            <div>
+                <ul class="nav-header">
+                    <li (click)="signOut()" class="nav-header-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </li>
+                    <li routerLink="/user" class="nav-header-item">
+                        <i class="fas fa-user-circle"></i>
+                    </li>
+                </ul>
+            </div>
         </mat-toolbar>
         <router-outlet></router-outlet>
-	</mat-drawer-content>
+    </mat-drawer-content>
 </mat-drawer-container>

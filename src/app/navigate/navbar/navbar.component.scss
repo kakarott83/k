@@ -67,3 +67,19 @@ mat-card {
 .sidNavItemText {
     margin-left: 0.5rem;
 }
+
+.nav-toolbar {
+    justify-content: flex-end;
+}
+
+.nav-header {
+    float: right;
+    list-style-type: none;
+    
+}
+
+.nav-header-item {
+    text-decoration: none; 
+    float: left;
+    margin-right: 1.5rem
+}
