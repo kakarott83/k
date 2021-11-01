@@ -1,1 +1,42 @@
-<p>travel-list works!</p>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnToDisplay">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnToDisplay.length">
+            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                <div class="detail">
+                    <div class="detail-logo">
+                        <img src="/assets/pictures/logo.png" width="50px" alt="">
+                    </div>
+                    <div class="detail-data">
+                        <div class="example-element-position"> {{element.customer}} </div>
+                        <div class="example-element-symbol"> {{element.reason}} </div>
+                        <div class="example-element-name"> {{element.city}} </div>
+                    </div>
+                    <div class="detail-state">
+                        <mat-checkbox [(ngModel)]="element.payOut">Ausgezahlt</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="element.checkIn">Eingereicht</mat-checkbox>
+                    </div>
+                    <div class="detail-spend">
+                        <div class="spends" *ngFor="let spend of element.mySpend">
+                            <div class="spendItem">{{spend.type}}</div>
+                            <div class="spendItem">{{spend.value}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnToDisplay;" class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

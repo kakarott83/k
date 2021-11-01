@@ -9,7 +9,8 @@ import { UserComponent } from '../user/user/user.component';
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  // private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(true);
 
   get isLoggedin() {
     return this.loggedIn.asObservable();

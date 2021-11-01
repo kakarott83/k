@@ -1,3 +1,36 @@
 .container {
     display: flex;
+    flex-direction: column;
+    background-color: lightgrey;
+}
+
+.headerGroup {
+    display: flex;
+    justify-content: center;
+}
+
+.subHeaderGroup {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header {
+    font-weight: bold;
+    margin-bottom: 5rem;
+}
+
+.table {
+    margin-top: 3rem;
+}
+
+.addButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.itemButton {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
 }
