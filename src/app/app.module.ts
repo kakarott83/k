@@ -12,6 +12,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { list } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +35,9 @@ import { UserComponent } from './user/user/user.component';
 import { ForgotPasswordComponent } from './credentials/forgot-password/forgot-password.component';
 import { VerifyEmailAddressComponent } from './credentials/verify-email-address/verify-email-address.component';
 import { WelcomeComponent } from './welcome/welcome/welcome.component';
+import { provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp } from '@firebase/app';
+import { config } from 'process';
 
 @NgModule({
   declarations: [
@@ -60,7 +69,9 @@ import { WelcomeComponent } from './welcome/welcome/welcome.component';
     MatToolbarModule,
     MatButtonModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [MediaMatcher],
   bootstrap: [AppComponent]
