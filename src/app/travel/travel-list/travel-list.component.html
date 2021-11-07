@@ -2,9 +2,15 @@
 
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnToDisplay">
         <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column]}}</td>
+        <td mat-cell *matCellDef="let element">
+            <div>{{element[column]}}</div>
+        </td>
+        <ng-template #action>
+            <button mat-button>Löschen</button>
+        </ng-template>
+        
     </ng-container>
-
+    
     <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="columnToDisplay.length">
             <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">

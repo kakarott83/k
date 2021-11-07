@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
+import { Observable } from 'rxjs';
 import { Spend } from 'src/app/model/spend';
+import { Travel } from 'src/app/model/travel';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-travel-new',
@@ -11,8 +13,12 @@ import { Spend } from 'src/app/model/spend';
 export class TravelNewComponent implements OnInit {
 
   myTravelForm!: FormGroup;
+  travels!: Travel[]
   
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private _service: FirestoreService
+    ) { }
 
   ngOnInit(): void {
 
@@ -26,11 +32,18 @@ export class TravelNewComponent implements OnInit {
       checkIn: true,
       payOut: ''
     })
+
+    // this.getTravels();
+
+
   }
 
   onSubmit() {
     console.log(this.myTravelForm.value);
     console.log(this.myTravelForm.value.start);
+    this._service.addTravel(this.myTravelForm.value)
+      .then(resp => console.log(resp,'Gui'))
+      .catch(e => console.log(e, 'Fehler'));
   }
 
   createSpend() {
@@ -48,6 +61,19 @@ export class TravelNewComponent implements OnInit {
   deleteSpend(spendIndex: number) {
     const add = this.myTravelForm.get('mySpend') as FormArray;
     add.removeAt(spendIndex);
+  }
+
+  getTravels() {
+    this._service.getTravels()
+      .subscribe(data => {
+          this.travels = data.map(e => {
+            return {
+              id: e.payload.doc.id,
+              ...e.payload.doc.data() as Travel
+            } as Travel
+          })
+        }
+    )
   }
 
   getControls() {

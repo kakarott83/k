@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Travel } from 'src/app/model/travel';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 const ELEMENT_TRAVELS: Travel[] = [
   {
@@ -40,9 +42,17 @@ export class TravelListComponent implements OnInit {
   columnToDisplay = ['start', 'end', 'customer', 'reason', 'id', 'delete']
   dataSource = ELEMENT_TRAVELS;
   expandedElement!: Travel | null;
-  constructor() { }
+  constructor(private _service: FirestoreService) { }
 
   ngOnInit(): void {
+    this._service.getTravels()
+      .subscribe(data => {
+        this.dataSource = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            ...e.payload.doc.data() as Travel
+          } as Travel
+        });
+      })
   }
-
 }
