@@ -31,14 +31,16 @@ export class RegisterComponent implements OnInit {
     this.myRegisterForm.patchValue({
       firstName: 'John',
       lastName: 'Doe',
-      email: 'test@test.de',
-      password: '123456',
-      confirmPassword: '123456'
+      email: 'ml@milan-muc.de',
+      password: 'abc123',
+      confirmPassword: 'abc123'
     })
   }
 
   onSubmit() {
-    this.authService.login(this.myRegisterForm.value);
+    console.log(this.myRegisterForm.value);
+    this.authService.SignUp(this.myRegisterForm.value.email, this.myRegisterForm.value.password)
+    //this.authService.login(this.myRegisterForm.value);
   }
 
 }

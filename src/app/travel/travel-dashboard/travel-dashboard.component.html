@@ -1,1 +1,6 @@
-<p>travel-dashboard works!</p>
+<div *ngIf="user">
+    <p>Hallo User</p>
+        <p>{{user.displayName}}</p>
+        <p>{{user.email}}</p>
+        <p>{{user.emailVerified}}</p>
+</div>

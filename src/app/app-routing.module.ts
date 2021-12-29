@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'sign-in', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'welcome', component: WelcomeComponent},
-  { path: 'dashboard', component: TravelDashboardComponent, canActivate: [AuthGuard]}, //, 
+  { path: 'dashboard', component: TravelDashboardComponent, canActivate: [AuthGuard]}, //canActivate: [AuthGuard], 
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'verfify-email', component: VerifyEmailAddressComponent},
   { path: 'travel-new', component: TravelNewComponent},

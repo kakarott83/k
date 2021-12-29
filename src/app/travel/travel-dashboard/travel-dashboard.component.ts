@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/model/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-travel-dashboard',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TravelDashboardComponent implements OnInit {
 
-  constructor() { }
+  public user: User | undefined;
+
+  constructor(
+    public authService: AuthService
+  ) {  }
 
   ngOnInit(): void {
+    this.getUser();
+    console.log(this.user, 'Dashboard User');
+  }
+
+  getUser() {
+    this.user = this.authService.getCurrentUser();
   }
 
 }

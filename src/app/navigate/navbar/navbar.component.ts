@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef,OnInit, OnDestroy, OnChanges, SimpleChange
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   collapsedNav: boolean = true;
   mobileQuery: MediaQueryList;
   isLoggedIn$!: Observable<boolean>;
-
+  isLoggedIn!: Observable<boolean>;
 
 
   private _mobileQueryListener: () => void;
@@ -37,7 +37,9 @@ export class NavbarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isLoggedin;
+    // this.isLoggedIn$ = this.authService.isLoggedin;
+    this.isLoggedIn$ = new BehaviorSubject<boolean>(true);
+    this.isLoggedIn = this.authService.isLoggedin;
   }
 
   ngOnDestroy(): void {

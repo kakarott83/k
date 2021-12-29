@@ -29,23 +29,28 @@ const ELEMENT_TRAVELS: Travel[] = [
   selector: 'app-travel-list',
   templateUrl: './travel-list.component.html',
   styleUrls: ['./travel-list.component.scss'],
-  animations: [
+  /*animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
       state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
-  ]
+  ]*/
 })
 export class TravelListComponent implements OnInit {
 
-  columnToDisplay = ['start', 'end', 'customer', 'reason', 'id', 'delete']
-  dataSource = ELEMENT_TRAVELS;
-  expandedElement!: Travel | null;
+  //columnToDisplay = ['start', 'end', 'customer', 'reason', 'id', 'delete']
+  dataSource: Travel[] = [];
+  //expandedElement!: Travel | null;
+  countResult: number = 5;
   constructor(private _service: FirestoreService) { }
 
   ngOnInit(): void {
-    this._service.getTravels()
+    this.getTravel(5);
+  }
+
+  getTravel(countResult?: number) {
+      this._service.getTravels(countResult)
       .subscribe(data => {
         this.dataSource = data.map(e => {
           return {
@@ -54,5 +59,18 @@ export class TravelListComponent implements OnInit {
           } as Travel
         });
       })
+  }
+
+  detailsTravel(id?: any) {
+    console.log(id);
+  }
+  
+  deleteTravel(id?: any) {
+    this._service.deleteTravel(id);
+  }
+
+  loadMoreTravels() {
+    this.countResult = this.countResult + 5;
+    this.getTravel(this.countResult)
   }
 }

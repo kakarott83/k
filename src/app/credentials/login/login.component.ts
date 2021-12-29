@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.myLoginForm.value);
+    //console.log(this.myLoginForm.value)
+    this.authService.SignIn(this.myLoginForm.value.email,this.myLoginForm.value.password)
+    //this.authService.login(this.myLoginForm.value);
   }
 
 }

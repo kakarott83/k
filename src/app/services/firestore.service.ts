@@ -26,12 +26,29 @@ export class FirestoreService {
     );
   }
 
-  deleteTravel() {
+  deleteTravel(id: string) {
 
+    console.log(id,'Delete');
+      this._firestore.collection('travels').doc(id).delete().then(() => {
+        console.log('Dokument gelöscht');
+      }).catch((err) => {
+        console.error('Fehler bei löschen', err);
+      });
+    
   }
 
-  getTravels() {
-    return this._firestore.collection('travels').snapshotChanges();
+  getTravels(countResult?: number) {
+    const counts: number = countResult == null ? 5 : countResult
+    if(countResult == null) {
+      countResult = 5;
+    }
+    return this._firestore
+      .collection('travels', 
+        ref => ref
+          .limit(counts)
+          .orderBy('start','desc')
+      )
+      .snapshotChanges();
   }
 
 

@@ -1,48 +1,57 @@
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-
-    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnToDisplay">
-        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let element">
-            <div>{{element[column]}}</div>
-        </td>
-        <ng-template #action>
-            <button mat-button>Löschen</button>
-        </ng-template>
-        
-    </ng-container>
-    
-    <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="columnToDisplay.length">
-            <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="detail">
-                    <div class="detail-logo">
-                        <img src="/assets/pictures/logo.png" width="50px" alt="">
-                    </div>
-                    <div class="detail-data">
-                        <div class="example-element-position"> {{element.customer}} </div>
-                        <div class="example-element-symbol"> {{element.reason}} </div>
-                        <div class="example-element-name"> {{element.city}} </div>
-                    </div>
-                    <div class="detail-state">
-                        <mat-checkbox [(ngModel)]="element.payOut">Ausgezahlt</mat-checkbox>
-                        <mat-checkbox [(ngModel)]="element.checkIn">Eingereicht</mat-checkbox>
-                    </div>
-                    <div class="detail-spend">
-                        <div class="spends" *ngFor="let spend of element.mySpend">
-                            <div class="spendItem">{{spend.type}}</div>
-                            <div class="spendItem">{{spend.value}}</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnToDisplay"></tr>
-    <tr mat-row *matRowDef="let element; columns: columnToDisplay;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
-    </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+<ng-template #load>
+    <div class="container-spinner">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+<div class="container-fluid">
+    <!--ToDo Suche implementieren-->
+    <div class="input-group mb-3">
+        <input type="text" style="width: 200px;" class="form-control" placeholder="Suche..."
+            aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">Suchen</button>
+        </div>
+    </div>
+    <table class="table table-striped table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Start</th>
+                <th scope="col">Ende</th>
+                <th scope="col">Kunde</th>
+                <th scope="col">Grund</th>
+                <th scope="col">Detail</th>
+                <th scope="col">Entfernen</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="dataSource.length > 0; else load">
+            <tr *ngFor="let item of dataSource">
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.start}}</td>
+                <td>{{item.end}}</td>
+                <td>{{item.customer}}</td>
+                <td>{{item.reason}}</td>
+                <td>
+                    <button type="button" (click)="detailsTravel(item.id)"
+                        class="btn btn-outline-success btn-rounded waves-effect">
+                        <i class="fas fa-info pr-2">
+                        </i>Detail
+                    </button>
+                </td>
+                <td>
+                    <button type="button" (click)="deleteTravel(item.id)"
+                        class="btn btn-outline-danger btn-rounded waves-effect">
+                        <i class="fas fa-trash pr-2" aria-hidden="true">
+                        </i>Löschen
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" (click)="loadMoreTravels()" class="btn btn-primary btn-lg btn-block">weitere Reisen
+            laden</button>
+    </div>
+</div>
