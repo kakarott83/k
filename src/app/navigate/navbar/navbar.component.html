@@ -1,10 +1,83 @@
-<mat-drawer-container>
-    <mat-drawer *ngIf="isLoggedIn$ | async as isLoggedIn" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
+<mat-drawer-container [class.drawer-opened]="drawer.opened" class="navbar-dark">
+    <mat-drawer #drawer fxFlex class="drawer" mode="side" opened="true">
+        <mat-list role="list">
+
+            <mat-list-item role="list-item">
+                <mat-toolbar class="header">
+                    <div>Menü</div>
+                    <mat-icon class="close" (click)="drawer.close()">close</mat-icon>
+                </mat-toolbar>
+            </mat-list-item>
+
+
+            <mat-list-item role="list-item">
+                <div class="sidNavItem" routerLink="/dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="sidNavItemText">Dashboard</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="list-item">
+                <div class="sidNavItem" routerLink="/travel-new">
+                    <i class="fas fa-suitcase"></i>
+                    <span class="sidNavItemText">Neue Reise</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="list-item">
+                <div class="sidNavItem" routerLink="/travel-list">
+                    <i class="fas fa-list"></i>
+                    <span class="sidNavItemText">Alle Reisen</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item role="list-item">
+                <div class="sidNavItem" routerLink="/setting">
+                    <i class="fas fa-cogs"></i>
+                    <span class="sidNavItemText">Einstellungen</span>
+                </div>
+            </mat-list-item>
+
+        </mat-list>
+
+
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar>
+            <ng-container>
+                <div class="main-header-items-right">
+                <mat-icon *ngIf="!drawer.opened" (click)="drawer.toggle()">
+                    menu
+                </mat-icon>
+                <img role="button" src="/assets/pictures/milan_logo.png" (click)="drawer.toggle()" alt="" height="50" width="50">
+            </div>
+                <div class="main-header-items-right">
+                    <i class="fas fa-sign-out-alt" (click)="signOut()"></i>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </ng-container>
+        </mat-toolbar>
+        <mat-toolbar class="main footer">
+            Footer
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+    
+
+
+
+    <!--div class="main contents">
+        drawer opened: {{drawer.opened}}
+        <router-outlet></router-outlet>
+        <div style="height: 1000px">&nbsp;</div>
+    </div-->
+
+
+
+
+    <!--mat-drawer *ngIf="isLoggedIn$ | async as isLoggedIn" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
         [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
         <div class="sidenav-header">
             <img role="button" (click)="mobileQuery.matches ? snav.toggle() : collapsedNav = !collapsedNav"
                 src="/assets/pictures/milan_logo.png" alt="" height="50" width="50">
-            <!--span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'Navigation'}}</span-->
+            <span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'Navigation'}}</span>
         </div>
         <ul>
             <li routerLink="/dashboard">
@@ -38,8 +111,8 @@
                 </div>
             </li>
         </ul>
-    </mat-drawer>
-    <mat-drawer-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
+    </mat-drawer-->
+    <!--mat-drawer-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
         <mat-toolbar *ngIf="isLoggedIn$ | async as isLoggedIn" class="nav-toolbar">
             <div>
                 <ul class="nav-header">
@@ -53,5 +126,5 @@
             </div>
         </mat-toolbar>
         <router-outlet></router-outlet>
-    </mat-drawer-content>
+    </mat-drawer-content-->
 </mat-drawer-container>

@@ -1,70 +1,77 @@
 <div class="container">
-    <form class="row g-3" [formGroup]="myTravelForm" (ngSubmit)="onSubmit()">
-        <div class="col-md-12 headerGroup">
-            <h2 class="header">Reisekosten</h2>
-        </div>
-        <div class="col-md-12 subHeaderGroup">
-            <h3 class="header">Erstattung 78€</h3>
-        </div>
-        <div class="col-md-12">
-            <div class="form-check col-md-3">
-                <input class="form-check-input" type="checkbox" formControlName="checkIn" id="checkIn">
-                <label class="form-check-label" for="checkIn">Eingereicht</label>
-            </div>
-            <div class="form-check col-md-3">
-                <input class="form-check-input" type="checkbox" formControlName="payOut" id="payOut">
-                <label class="form-check-label" for="payOut">Ausgezahlt</label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <label for="start" class="form-label">Start</label>
-            <input type="datetime-local" class="form-control" formControlName="start" id="start">
-        </div>
-        <div class="col-md-6">
-            <label for="end" class="form-label">Ende</label>
-            <input type="datetime-local" class="form-control" formControlName="end" id="end">
-        </div>
-        <div class="col-md-4">
-            <label for="customer" class="form-label">Kunde</label>
-            <input type="text" class="form-control" formControlName="customer" id="customer">
-        </div>
-        <div class="col-md-4">
-            <label for="city" class="form-label">Ort</label>
-            <input type="text" class="form-control" formControlName="city" id="city">
-        </div>
-        <div class="col-md-4">
-            <label for="reason" class="form-label">Zweck</label>
-            <input type="text" class="form-control" formControlName="reason" id="reason">
-        </div>
-        <div>
-            <button class="btn btn-success" (click)="addSpend()">Auslagen</button>
-        </div>
-        <div formArrayName="mySpend" *ngFor="let spends of getControls(); let i = index">
-            <div [formGroupName]="i">
-                <div class="col-md-5">
-                    <label for="spend" class="form-label">Ausgaben</label>
-                    <input type="text" class="form-control" formControlName="spendType" id="type">
+    <div class="row">
+        <div class="col-8 travel-data">
+            <form [formGroup]="myTravelForm" (ngSubmit)="onSubmit()">
+                <div class="form-header">
+                    <h3>Reisedaten</h3>
                 </div>
-                <div class="col-md-5">
-                    <label for="spendValue" class="form-label">Betrag</label>
-                    <input type="number" class="form-control" formControlName="spendValue" id="spendValue">
+                <div class="col-md-6 form-item">
+                    <label for="start" class="form-label">Start</label>
+                    <input type="datetime-local" class="form-control" formControlName="start" id="start">
                 </div>
-                <div class="col-md-2 itemButton">
-                    <div class="itemButton">
-                        <button class="btn btn-danger form-control" (click)="deleteSpend(i)">Löschen</button>
+                <div class="col-md-6 form-item">
+                    <label for="end" class="form-label">Ende</label>
+                    <input type="datetime-local" class="form-control" formControlName="end" id="end">
+                </div>
+                <div class="col-md-4 form-item">
+                    <label for="customer" class="form-label">Kunde</label>
+                    <input type="text" class="form-control" formControlName="customer" id="customer">
+                </div>
+                <div class="col-md-4 form-item">
+                    <label for="city" class="form-label">Ort</label>
+                    <input type="text" class="form-control" formControlName="city" id="city">
+                </div>
+                <div class="col-md-4 form-item">
+                    <label for="reason" class="form-label">Zweck</label>
+                    <input type="text" class="form-control" formControlName="reason" id="reason">
+                </div>
+                <div formArrayName="mySpend" *ngFor="let spends of getControls(); let i = index">
+                    <div [formGroupName]="i">
+                        <div class="col-md-4">
+                            <label for="spend" class="form-label">Ausgaben</label>
+                            <input type="text" class="form-control" formControlName="spendType" id="type">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="spendValue" class="form-label">Betrag</label>
+                            <input #spend type="number" class="form-control" formControlName="spendValue" id="spendValue">
+                        </div>
+                        <div class="col-md-4 btn-group form-spend">
+                            <div class="form-btn">
+                                <i class="fas fa-plus-circle fa-2x btn-spend-plus" (click)="addSpend()"></i>
+                            </div>
+                            <div *ngIf="i > 0" class="form-btn">
+                                <i class="fas fa-minus-circle fa-2x btn-spend-minus" (click)="deleteSpend(i)"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!--div class="col-md-4 itemButton">
-                    <button class="btn btn-danger" (click)="deleteSpend(i)">Löschen</button>
-                </div-->
+                <button type="submit" class="btn btn-primary form-add-button">Speichern</button>
+            </form>
+        </div>
+        <div class="col-4 travel-summary">
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-header">
+                        <h3>Zusammenfassung</h3>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="mb-1">Dauer der Reise</h5>
+                        <p class="mb-1">2 Tag(e) 8h </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="mb-1">Verpflegungsaufwand</h5>
+                        <p class="mb-1">36€ </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="mb-1">Auslagen</h5>
+                        <p class="mb-1">80€ </p>
+                    </li>
+                    <li class="list-group-item">
+                        <h3>Summe</h3>
+                        <p class="mb-1 sum">116€ </p>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Speichern</button>
-        </div>
-    </form>
-    <!--Travels Table-->
-    <div class="row g-3 travelTable">
-        <app-travel-list></app-travel-list>
     </div>
 </div>

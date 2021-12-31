@@ -1,41 +1,60 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    background-color: lightgrey;
+.list-group-header {
+    background-color: #84DCF1;
+    border: none;
+    color: black;
+    margin-top: 0;
 }
 
-.headerGroup {
-    display: flex;
-    justify-content: center;
+.form-header {
+    background-color: #84DCF1;
+    border: none;
+    color: black;
+    border-radius: 4px;
+    padding: 10px 5px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
-.subHeaderGroup {
-    display: flex;
-    justify-content: flex-end;
+.form-item {
+    margin-bottom: 10px;
 }
 
-.header {
+.travel-data {
+    background-color: var(--background-color);
+}
+
+.travel-summary {
+    background-color: var(--primary-color);
+}
+
+.form-add-button {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.form-spend {
+    display: flex;
+    height: 60px;
+    justify-content: flex-start;
+}
+
+.form-btn {
+    display: flex;
+    padding-top: 27px;
+    padding-right: 5px;
+    :hover {
+        color: grey;
+    }
+}
+
+.btn-spend-plus {
+    color: green;
+}
+
+.btn-spend-minus {
+    color: red;
+}
+
+.sum {
     font-weight: bold;
-    margin-bottom: 5rem;
-}
-
-.table {
-    margin-top: 3rem;
-}
-
-.addButton {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.itemButton {
-    display: flex;
-    flex-direction: column;
-    margin-top: 12px;
-}
-
-.travelTable {
-    display: flex;
-    margin-top: 5rem;
 }

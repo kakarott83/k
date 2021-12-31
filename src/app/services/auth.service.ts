@@ -93,6 +93,7 @@ export class AuthService {
     return await this.afsAuth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log(user, 'LogIn');
         this.SetUserData(user);
         this.loggedIn.next(true);
         this.currentUser = user;
@@ -127,6 +128,13 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true
     })
+  }
+
+  async updateProfil(displayName: string) {
+    const profile = {
+      displayName: displayName
+    }
+    return (await this.afsAuth.currentUser)?.updateProfile(profile);
   }
 
   getCurrentUser() {

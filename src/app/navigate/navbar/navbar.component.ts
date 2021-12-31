@@ -11,24 +11,26 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, OnChanges {
 
-  collapsedNav: boolean = true;
-  mobileQuery: MediaQueryList;
+  showFiller = false;
+
+  //collapsedNav: boolean = true;
+  //mobileQuery: MediaQueryList;
   isLoggedIn$!: Observable<boolean>;
   isLoggedIn!: Observable<boolean>;
 
 
-  private _mobileQueryListener: () => void;
+  //private _mobileQueryListener: () => void;
 
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  //shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 
   constructor(
-    changeDetectorRef: ChangeDetectorRef, 
-    media: MediaMatcher,
+    //changeDetectorRef: ChangeDetectorRef, 
+    //media: MediaMatcher,
     private authService: AuthService,
     private router: Router) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    //this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    //this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    //this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
 
@@ -43,7 +45,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    //this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   signOut() {

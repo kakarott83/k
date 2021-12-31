@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { environment } from '../environments/environment';
@@ -68,6 +69,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
+    MatListModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatTableModule,
